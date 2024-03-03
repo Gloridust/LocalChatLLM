@@ -5,7 +5,7 @@ def response_text(message):
     modelname = 'qwen:14b'
     response = ollama.chat(
         model = modelname, 
-        messages = [message],
+        messages = message,
         stream = False,
         )
     output_text = response['message']['content']
@@ -20,7 +20,7 @@ while True:
     user_input_text = input("Input:")
     message = {'role': 'user', 'content': user_input_text}
     message_lists.append(message)
-    output_text, message_list = response_text(message)
+    output_text, message_list = response_text(message_lists)
     message_lists.append(message_list)
     print(output_text)
     print(message_lists)
