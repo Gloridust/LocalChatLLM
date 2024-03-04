@@ -1,0 +1,4 @@
+ollama
+openai-whisper
+pyaudio
+pydub
