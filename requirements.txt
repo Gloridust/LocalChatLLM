@@ -2,3 +2,4 @@ ollama
 openai-whisper
 pyaudio
 pydub
+ffmpeg
