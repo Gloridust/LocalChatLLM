@@ -8,10 +8,10 @@ LocalChatLLM 是一个由 **YGeeker Pioneer** 计划主导的开源项目，旨�
 
 ## 主要技术栈
 
--[x] Python  
--[x] ollama  
--[x] openai-whisper  
--[x] pyttsx3  
+- [x] Python  
+- [x] ollama  
+- [x] openai-whisper  
+- [x] pyttsx3  
 
 ## 功能实现
 
