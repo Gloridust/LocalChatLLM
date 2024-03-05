@@ -7,10 +7,13 @@ import pyttsx3
 import ssl
 
 ######config#####
+
 # For Chinese use 'qwen:7b'
 model_name = 'localchatllm-qwen-7b' 
+
 # For English use 'gemma:7b'
 # model_name = 'localchatllm-gemma-7b' 
+
 #################
 
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
