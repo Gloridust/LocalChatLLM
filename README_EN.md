@@ -28,6 +28,15 @@ It's worth noting that this project supports bilingual capabilities in Chinese a
 
 ## Changelog
 
+### v1.1.0
+- Added runtime detection feature, which can calculate the processing time of each loop:
+
+```
+asr time: 2.155439000001934 # Time for speech-to-text conversion
+get_response time: 4.139052400001674 # Time for processing with large language model
+all time: 6.295364899997367 # Total processing time
+```
+
 ### v1.0.1
 
 - Added text detection to automatically terminate the program if no one speaks.
