@@ -1,6 +1,6 @@
 ollama
-openai-whisper
 pyaudio
 pydub
 ffmpeg
 pyttsx3
+openai-whisper
