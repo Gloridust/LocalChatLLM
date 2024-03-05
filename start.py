@@ -4,6 +4,9 @@ import pyaudio
 import wave
 import os
 
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
     audio = pyaudio.PyAudio()
     # 打开麦克风
