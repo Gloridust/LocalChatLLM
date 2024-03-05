@@ -75,6 +75,7 @@ def delete_file(filename):
 def tts(output_text):
     pyttsx3.speak(output_text)
 
+
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
     message_history = []
@@ -83,6 +84,10 @@ if __name__ == "__main__":
         # user_input_text = input("Input:")
         record_audio("audio.wav", duration=5)
         user_input_text = asr("audio.wav")
+
+        if user_input_text == "" or user_input_text == " you":
+            break
+
         delete_file("audio.wav")
         message = {'role': 'user', 'content': user_input_text}
         message_history.append(message)
