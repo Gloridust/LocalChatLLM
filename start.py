@@ -6,6 +6,7 @@ import os
 import pyttsx3
 import ssl
 import sys
+import time
 
 ######config#####
 
@@ -79,7 +80,11 @@ def tts(output_text):
 def main_loop():
     # user_input_text = input("Input:")
     record_audio("audio.wav", duration=5)
+    start_all = time.perf_counter()
+
+    start_asr = time.perf_counter()
     user_input_text = asr("audio.wav")
+    end_asr = time.perf_counter()
 
     if user_input_text == "" or user_input_text == " you":
         sys.exit(0)
@@ -87,10 +92,19 @@ def main_loop():
     delete_file("audio.wav")
     message = {'role': 'user', 'content': user_input_text}
     message_history.append(message)
+
+    start_get_response = time.perf_counter()
     output_text, received_message = get_response(message_history,model_name)
+    end_get_response = time.perf_counter()
+    
     message_history.append(received_message)
     print(output_text)
+    end_all = time.perf_counter()
     tts(output_text)
+
+    print("asr time:",end_asr - start_asr)
+    print("get_response time:",end_get_response - start_get_response)
+    print("all time:",end_all - start_all)
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
