@@ -5,6 +5,7 @@ import wave
 import os
 import pyttsx3
 import ssl
+import sys
 
 ######config#####
 
@@ -75,23 +76,25 @@ def delete_file(filename):
 def tts(output_text):
     pyttsx3.speak(output_text)
 
+def main_loop():
+    # user_input_text = input("Input:")
+    record_audio("audio.wav", duration=5)
+    user_input_text = asr("audio.wav")
+
+    if user_input_text == "" or user_input_text == " you":
+        sys.exit(0)
+
+    delete_file("audio.wav")
+    message = {'role': 'user', 'content': user_input_text}
+    message_history.append(message)
+    output_text, received_message = get_response(message_history,model_name)
+    message_history.append(received_message)
+    print(output_text)
+    tts(output_text)
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
     message_history = []
 
     while True:
-        # user_input_text = input("Input:")
-        record_audio("audio.wav", duration=5)
-        user_input_text = asr("audio.wav")
-
-        if user_input_text == "" or user_input_text == " you":
-            break
-
-        delete_file("audio.wav")
-        message = {'role': 'user', 'content': user_input_text}
-        message_history.append(message)
-        output_text, received_message = get_response(message_history,model_name)
-        message_history.append(received_message)
-        print(output_text)
-        tts(output_text)
+        main_loop()
