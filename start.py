@@ -52,8 +52,7 @@ def asr(file):
     print(result["text"])
     return(result["text"])
 
-def get_response(message):
-    model_name = model_name
+def get_response(message,model_name):
     response = ollama.chat(
         model=model_name, 
         messages=message,
@@ -84,7 +83,7 @@ if __name__ == "__main__":
         delete_file("audio.wav")
         message = {'role': 'user', 'content': user_input_text}
         message_history.append(message)
-        output_text, received_message = get_response(message_history)
+        output_text, received_message = get_response(message_history,model_name)
         message_history.append(received_message)
         print(output_text)
         tts(output_text)
