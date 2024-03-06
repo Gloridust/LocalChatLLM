@@ -16,6 +16,7 @@ model_name = 'localchatllm-qwen-7b'
 # For English use 'gemma:7b'
 # model_name = 'localchatllm-gemma-7b' 
 
+whisper_model = "small"
 #################
 
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
@@ -52,7 +53,7 @@ def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, forma
 
 
 def asr(file):
-    model = whisper.load_model("base")
+    model = whisper.load_model(whisper_model)
     result = model.transcribe(file)
     print(result["text"])
     return(result["text"])

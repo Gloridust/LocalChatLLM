@@ -109,7 +109,7 @@ ollama create localchatllm-qwen-7b -f ./modelfile_cn
 5. 初始化并尝试运行whisper：
 
 ```bash
-whisper audio.wav --language English --model base
+whisper audio.wav --language English --model small
 ```
 
 大功告成！

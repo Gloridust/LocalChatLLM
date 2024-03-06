@@ -108,7 +108,7 @@ ollama create localchatllm-gemma-7b -f ./modelfile_en
 5. Initialize and try running whisper:
 
 ```bash
-whisper audio.wav --language English --model base
+whisper audio.wav --language English --model small
 ```
 
 You're all set!
