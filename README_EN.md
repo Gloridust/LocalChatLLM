@@ -98,7 +98,7 @@ If you encounter installation errors in the 'pip install' commands mentioned abo
 pip install setuptools-rust
 ```
 
-4. Pull the required olamma model and customize:
+4. Pull the required ollama model and customize:
 
 ```bash
 ollama pull gemma:7b
