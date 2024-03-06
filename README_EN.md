@@ -28,6 +28,10 @@ It's worth noting that this project supports bilingual capabilities in Chinese a
 
 ## Changelog
 
+### v1.1.1
+
+- Switch Whisper model to 'small' to improve accuracy
+
 ### v1.1.0
 - Added runtime detection feature, which can calculate the processing time of each loop:
 
