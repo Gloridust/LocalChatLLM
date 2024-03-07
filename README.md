@@ -113,7 +113,25 @@ ollama create localchatllm-qwen-7b -f ./modelfile_cn
 5. 初始化并尝试运行whisper：
 
 ```bash
-whisper audio.wav --language English --model small
+whisper audio.wav --model small
+```
+
+6. 调整其他配置
+
+打开'start.py'，你可以看见一些可以修改的配置：
+
+```python
+######config#####
+
+# For Chinese use 'qwen:7b'
+model_name = 'localchatllm-qwen-7b' 
+
+# For English use 'gemma:7b'
+# model_name = 'localchatllm-gemma-7b' 
+
+whisper_model = "small"
+whisper_language = "zh"
+#################
 ```
 
 大功告成！
@@ -121,7 +139,7 @@ whisper audio.wav --language English --model small
 ## 运行
 
 ```bash
-python ./start.py
+python start.py
 ```
 
 程序录音5秒钟，然后等待生成回答。在朗读完生成的回答后，会再次进入录音状态，以此循环。
