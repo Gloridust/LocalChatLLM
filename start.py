@@ -17,6 +17,7 @@ model_name = 'localchatllm-qwen-7b'
 # model_name = 'localchatllm-gemma-7b' 
 
 whisper_model = "small"
+whisper_language = "zh"
 #################
 
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
@@ -54,11 +55,11 @@ def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, forma
 
 def asr(file):
     model = whisper.load_model(whisper_model)
-    result = model.transcribe(file)
+    result = model.transcribe(file, language=whisper_language)
     print(result["text"])
     return(result["text"])
 
-def get_response(message,model_name):
+def get_response(message):
     response = ollama.chat(
         model=model_name, 
         messages=message,
@@ -79,7 +80,6 @@ def tts(output_text):
     pyttsx3.speak(output_text)
 
 def main_loop():
-    # user_input_text = input("Input:")
     record_audio("audio.wav", duration=5)
     start_all = time.perf_counter()
 
@@ -88,6 +88,7 @@ def main_loop():
     end_asr = time.perf_counter()
 
     if user_input_text == "" or user_input_text == " you":
+        print("no voice found")
         sys.exit(0)
 
     delete_file("audio.wav")
