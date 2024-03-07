@@ -133,6 +133,12 @@ whisper_language = "zh"
 #################
 ```
 
+If you want to use it for English purposes, you need to modify the following configuration：
+
+```python
+whisper_language = "en"
+```
+
 You're all set!
 
 ## Running
