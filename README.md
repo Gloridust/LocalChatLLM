@@ -3,7 +3,7 @@
 LocalChatLLM 是一个由 **YGeeker Pioneer** 计划主导的开源项目，旨在实现开箱即用的本地化离线自然语言语音交互。
 
 <a href="https://www.ygeeker.com">
-  <img width="180" alt="Sponsored by YGeeker" src="https://www.ygeeker.com/badge/sponsor.png">
+  <img width="180" alt="Sponsored by YGeeker" src="https://www.ygeeker.com.cn/badge/sponsor.png">
 </a >
 
 你需要注意的是，本项目支持中英双语。而不同语言的文档中使用的模型不同：中文使用的是'qwen:7b'，而英文版本为'gemma:7b'，请按照需要选择模型。[For English? Please click here.](./README_EN.md)
