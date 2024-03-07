@@ -96,7 +96,7 @@ def main_loop():
     message_history.append(message)
 
     start_get_response = time.perf_counter()
-    output_text, received_message = get_response(message_history,model_name)
+    output_text, received_message = get_response(message_history)
     end_get_response = time.perf_counter()
     
     message_history.append(received_message)
