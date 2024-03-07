@@ -115,6 +115,24 @@ ollama create localchatllm-gemma-7b -f ./modelfile_en
 whisper audio.wav --language English --model small
 ```
 
+6. Adjust other configurations
+
+Open 'start.py' and you can see some configurations that can be modified:
+
+```python
+######config#####
+
+# For Chinese use 'qwen:7b'
+model_name = 'localchatllm-qwen-7b' 
+
+# For English use 'gemma:7b'
+# model_name = 'localchatllm-gemma-7b' 
+
+whisper_model = "small"
+whisper_language = "zh"
+#################
+```
+
 You're all set!
 
 ## Running
