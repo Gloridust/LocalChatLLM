@@ -110,7 +110,7 @@ def main_loop():
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
-    os.system("ollama serve")
+    # os.system("ollama serve")
     message_history = []
 
     while True:
