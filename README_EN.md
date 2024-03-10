@@ -139,6 +139,8 @@ If you want to use it for English purposes, you need to modify the following con
 whisper_language = "en"
 ```
 
+See [tokenizer.py](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py) for the list of all available languages.
+
 You're all set!
 
 ## Running
