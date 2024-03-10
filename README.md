@@ -134,6 +134,8 @@ whisper_language = "zh"
 #################
 ```
 
+在[tokenizer.py](https://github.com/openai/whisper/blob/main/whisper/tokenizer.py)查看所有支持的语言
+
 大功告成！
 
 ## 运行
