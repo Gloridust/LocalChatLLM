@@ -102,11 +102,12 @@ def main_loop():
     message_history.append(received_message)
     print(output_text)
     end_all = time.perf_counter()
-    tts(output_text)
 
     print("asr time:",end_asr - start_asr)
     print("get_response time:",end_get_response - start_get_response)
     print("all time:",end_all - start_all)
+
+    tts(output_text)
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
