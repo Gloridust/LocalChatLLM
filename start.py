@@ -7,11 +7,13 @@ import pyttsx3
 import ssl
 import sys
 import time
+from modelscope import AutoModelForCausalLM, AutoTokenizer
+from modelscope import GenerationConfig
 
 ######config#####
 
 # For Chinese use 'qwen:7b'
-model_name = 'localchatllm-qwen-7b' 
+model_name = 'qwen/Qwen-14B-Chat' 
 
 # For English use 'gemma:7b'
 # model_name = 'localchatllm-gemma-7b' 
@@ -19,6 +21,9 @@ model_name = 'localchatllm-qwen-7b'
 whisper_model = "small"
 whisper_language = "zh"
 #################
+
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", trust_remote_code=True).eval()
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
 
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
     audio = pyaudio.PyAudio()
@@ -59,16 +64,6 @@ def asr(file):
     print(result["text"])
     return(result["text"])
 
-def get_response(message):
-    response = ollama.chat(
-        model=model_name, 
-        messages=message,
-        stream=False,
-    )
-    output_text = response['message']['content']
-    received_message = response['message']
-    return output_text, received_message
-
 def delete_file(filename):
     try:
         os.remove(filename)
@@ -93,26 +88,24 @@ def main_loop():
 
     delete_file("audio.wav")
     message = {'role': 'user', 'content': user_input_text}
-    message_history.append(message)
 
     start_get_response = time.perf_counter()
-    output_text, received_message = get_response(message_history)
+    response, history = model.chat(tokenizer,user_input_text, history=history)
+    print(history)
     end_get_response = time.perf_counter()
     
-    message_history.append(received_message)
-    print(output_text)
+    print(response)
     end_all = time.perf_counter()
 
     print("asr time:",end_asr - start_asr)
     print("get_response time:",end_get_response - start_get_response)
     print("all time:",end_all - start_all)
 
-    tts(output_text)
+    tts(response)
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
     # os.system("ollama serve")
-    message_history = []
 
     while True:
         main_loop()
