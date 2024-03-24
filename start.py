@@ -13,7 +13,7 @@ from modelscope import GenerationConfig
 ######config#####
 
 # For Chinese use 'qwen:7b'
-model_name = 'qwen/Qwen-14B-Chat' 
+model_name = 'qwen/Qwen-7B-Chat-Int4' 
 
 # For English use 'gemma:7b'
 # model_name = 'localchatllm-gemma-7b' 
@@ -22,8 +22,10 @@ whisper_model = "small"
 whisper_language = "zh"
 #################
 
+# Init
 model = AutoModelForCausalLM.from_pretrained(model_name, device_map="auto", trust_remote_code=True).eval()
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+# model.generation_config = GenerationConfig.from_pretrained(model_name, trust_remote_code=True)
 
 def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
     audio = pyaudio.PyAudio()
@@ -106,11 +108,12 @@ def main_loop():
 
     # Delet File
     delete_file("audio.wav")
-    message = {'role': 'user', 'content': user_input_text}
+    # message = {'role': 'user', 'content': user_input_text}
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
     # os.system("ollama serve")
 
     while True:
+        history=None
         main_loop()
