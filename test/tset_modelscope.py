@@ -2,7 +2,7 @@ from modelscope import AutoModelForCausalLM, AutoTokenizer
 from modelscope import GenerationConfig
 
 tokenizer = AutoTokenizer.from_pretrained("qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True, fp16=True).eval()
+model = AutoModelForCausalLM.from_pretrained("qwen/Qwen-7B-Chat-Int4", device_map="auto", trust_remote_code=True).eval()
 model.generation_config = GenerationConfig.from_pretrained("qwen/Qwen-7B-Chat-Int4", trust_remote_code=True)
 
 
