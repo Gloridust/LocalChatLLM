@@ -75,20 +75,21 @@ def tts(output_text):
     pyttsx3.speak(output_text)
 
 def main_loop():
+    # Record voice
     record_audio("audio.wav", duration=5)
     start_all = time.perf_counter()
 
+    # ASR
     start_asr = time.perf_counter()
     user_input_text = asr("audio.wav")
     end_asr = time.perf_counter()
 
+    # No voice input
     if user_input_text == "" or user_input_text == " you":
         print("no voice found")
         sys.exit(0)
 
-    delete_file("audio.wav")
-    message = {'role': 'user', 'content': user_input_text}
-
+    # Run LLM
     start_get_response = time.perf_counter()
     response, history = model.chat(tokenizer,user_input_text, history=history)
     print(history)
@@ -102,6 +103,10 @@ def main_loop():
     print("all time:",end_all - start_all)
 
     tts(response)
+
+    # Delet File
+    delete_file("audio.wav")
+    message = {'role': 'user', 'content': user_input_text}
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
