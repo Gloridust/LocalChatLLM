@@ -11,10 +11,10 @@ import time
 ######config#####
 
 # For Chinese use 'qwen:7b'
-model_name = 'localchatllm-qwen-7b' 
+model_name = 'localchatllm-qwen-7b'
 
 # For English use 'gemma:7b'
-# model_name = 'localchatllm-gemma-7b' 
+# model_name = 'localchatllm-gemma-7b'
 
 whisper_model = "small"
 whisper_language = "zh"
@@ -57,17 +57,20 @@ def asr(file):
     model = whisper.load_model(whisper_model)
     result = model.transcribe(file, language=whisper_language)
     print(result["text"])
-    return(result["text"])
+    return result["text"]
+
 
 def get_response(message):
     response = ollama.chat(
-        model=model_name, 
+        model=model_name,
         messages=message,
-        stream=False,
+        stream=True,
     )
-    output_text = response['message']['content']
-    received_message = response['message']
-    return output_text, received_message
+    for chunk in response:
+        output_text = chunk
+        print(output_text)
+        tts(output_text)
+
 
 def delete_file(filename):
     try:
@@ -76,8 +79,10 @@ def delete_file(filename):
     except FileNotFoundError:
         print("File", filename, "not found.")
 
+
 def tts(output_text):
     pyttsx3.speak(output_text)
+
 
 def main_loop():
     record_audio("audio.wav", duration=5)
@@ -96,18 +101,15 @@ def main_loop():
     message_history.append(message)
 
     start_get_response = time.perf_counter()
-    output_text, received_message = get_response(message_history)
+    get_response(message_history)
     end_get_response = time.perf_counter()
-    
-    message_history.append(received_message)
-    print(output_text)
+
     end_all = time.perf_counter()
 
-    print("asr time:",end_asr - start_asr)
-    print("get_response time:",end_get_response - start_get_response)
-    print("all time:",end_all - start_all)
+    print("asr time:", end_asr - start_asr)
+    print("get_response time:", end_get_response - start_get_response)
+    print("all time:", end_all - start_all)
 
-    tts(output_text)
 
 if __name__ == "__main__":
     ssl._create_default_https_context = ssl._create_unverified_context
