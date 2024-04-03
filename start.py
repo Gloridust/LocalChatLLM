@@ -7,6 +7,7 @@ import pyttsx3
 import ssl
 import sys
 import time
+from openai import OpenAI
 
 ######config#####
 
