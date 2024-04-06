@@ -20,7 +20,7 @@ whisper_model = "small"
 whisper_language = "zh"
 #################
 
-def record_audio(filename, duration=5, sample_rate=44100, chunk_size=1024, format=pyaudio.paInt16, channels=1):
+def record_audio(filename, duration=5, sample_rate=8000, chunk_size=1024, format=pyaudio.paInt16, channels=1):
     audio = pyaudio.PyAudio()
     # open microphone
     stream = audio.open(format=format,
